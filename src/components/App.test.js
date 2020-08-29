@@ -45,8 +45,27 @@ describe('App', () => {
                 app.find('.btn').at(0).simulate('click');
             });
 
+            // reset
+            afterEach(() => {
+                app.find('.btn').at(1).simulate('click');
+            });
+
             it('should add the new note to the state', () => {
                 expect(app.state().notes[0].text).toEqual(testNote);
+            });
+
+            // for the cookies
+            describe('and it should remount the component', () => {
+                let app2;
+
+                beforeEach(() => {
+                    app2 = mount(<App />);
+                });
+
+                it('reads the stored note cookies', () => {
+                    console.log(app2.state());
+                    expect(app2.state().notes).toEqual([{ text: testNote }]);
+                });
             });
         });
 
