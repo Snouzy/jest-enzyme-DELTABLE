@@ -39,5 +39,26 @@ describe('App', () => {
         it('should update the text in state', () => {
             expect(app.state().text).toEqual(testNote);
         });
+
+        describe('when submitting a new note', () => {
+            beforeEach(() => {
+                app.find('.btn').at(0).simulate('click');
+            });
+
+            it('should add the new note to the state', () => {
+                expect(app.state().notes[0].text).toEqual(testNote);
+            });
+        });
+
+        describe('when clearing a note', () => {
+            beforeEach(() => {
+                app.find('.btn').at(1).simulate('click');
+            });
+
+            it('should clear the state', () => {
+                // expect(app.state().notes.length).toEqual(0);
+                expect(app.state().notes).toEqual([]);
+            });
+        });
     });
 });
